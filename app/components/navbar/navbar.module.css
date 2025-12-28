@@ -1,0 +1,7 @@
+.nav {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    align-items: left;
+    border-bottom: 1px solid var(--foreground);
+}
