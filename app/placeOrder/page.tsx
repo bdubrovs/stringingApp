@@ -6,7 +6,13 @@ import styles from "./placeOrder.module.css";
 export default function PlaceOrder() {
   const [stringPreference, setStringPreference] = useState(false);
   const [tensionPreference, setTensionPreference] = useState(false);
+  const [deliveryDate, setDeliveryDate] = useState("");
 
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
 
   return (
     <main className={styles.container}>
@@ -17,7 +23,7 @@ export default function PlaceOrder() {
         </p>
       </header>
 
-      <form className={styles.formCard}>
+      <form onSubmit={handleSubmit} className={styles.formCard}>
         {/* Contact Information Section */}
         <section className={styles.formSection}>
           <h2 className={styles.sectionTitle}>
@@ -201,15 +207,22 @@ export default function PlaceOrder() {
             Delivery Date
           </h2>
           <div className={styles.formGrid}>
-            <label className={`${styles.checkboxGroup} ${styles.formGroupFull}`}>
-              <input type="date" name="deliveryDate" className={styles.checkbox} />
-              <div>
-                <span className={styles.checkboxLabel}>Delivery Date</span>
-                <p className={styles.checkboxDescription}>
-                  Please select a delivery date if you need the racket done by a certain date. Otherwise, I will complete it as soon as I can.
-                </p>
-              </div>
-            </label>
+            <div className={styles.formGroup}>
+              <label className={styles.label} htmlFor="deliveryDate">
+                Select Delivery Date
+              </label>
+              <input
+                type="date"
+                id="deliveryDate"
+                name="deliveryDate"
+                className={styles.input}
+                value={deliveryDate}
+                onChange={(e) => setDeliveryDate(e.target.value)}
+              />
+            </div>
+            <p className={`${styles.checkboxDescription} ${styles.formGroupFull}`}>
+              Please select a delivery date if you need the racket done by a certain date. Otherwise, I will complete it as soon as I can.
+            </p>
           </div>
         </section>
 
@@ -234,7 +247,7 @@ export default function PlaceOrder() {
 
         {/* Submit Section */}
         <div className={styles.submitSection}>
-          <button type="submit" className={styles.submitButton}>
+          <button type="submit" className={styles.submitButton} style={{ color: "var(--foreground)" }}>
             Submit Order Request
           </button>
 
@@ -243,6 +256,6 @@ export default function PlaceOrder() {
           By submitting this form, you agree to be contacted regarding your stringing order.
         </p>
       </form>
-    </main>
+    </main >
   );
 }
