@@ -3,16 +3,18 @@
 import { useState } from "react";
 import styles from "./placeOrder.module.css";
 
+import { createOrder } from "../lib/actions";
+
 export default function PlaceOrder() {
   const [stringPreference, setStringPreference] = useState(false);
   const [tensionPreference, setTensionPreference] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState("");
 
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
+  // function handleSubmit(e: React.FormEvent) {
+  //   e.preventDefault();
+  //   console.log("Form submitted");
+  // }
 
   return (
     <main className={styles.container}>
@@ -23,7 +25,7 @@ export default function PlaceOrder() {
         </p>
       </header>
 
-      <form onSubmit={handleSubmit} className={styles.formCard}>
+      <form action={createOrder} className={styles.formCard}>
         {/* Contact Information Section */}
         <section className={styles.formSection}>
           <h2 className={styles.sectionTitle}>
@@ -32,15 +34,15 @@ export default function PlaceOrder() {
           </h2>
           <div className={styles.formGrid}>
             <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="firstName">
+              <label className={styles.label} htmlFor="name">
                 Name<span className={styles.required}>*</span>
               </label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="name"
+                name="name"
                 className={styles.input}
-                placeholder="Name"
+                placeholder="name"
                 required
               />
             </div>
@@ -119,14 +121,28 @@ export default function PlaceOrder() {
           </h2>
           <div className={styles.infoBox}>
             <span className={styles.infoIcon}>ℹ️</span>
-            <input type="checkbox" name="noStringPreference" className={styles.checkbox} onChange={(e) => setStringPreference(e.target.checked)} checked={stringPreference} />
+            <input
+              type="checkbox"
+              id="noStringPreference"
+              name="noStringPreference"
+              className={styles.checkbox}
+              onChange={(e) => setStringPreference(e.target.checked)}
+              checked={stringPreference}
+            />
             <label className={styles.label} htmlFor="noStringPreference">
               Please check this box if you do not have a string preference. We can discuss options when you drop off your racket.
             </label>
           </div>
           <div className={styles.infoBox}>
             <span className={styles.infoIcon}>ℹ️</span>
-            <input type="checkbox" name="noTensionPreference" className={styles.checkbox} onChange={(e) => setTensionPreference(e.target.checked)} checked={tensionPreference} />
+            <input
+              type="checkbox"
+              id="noTensionPreference"
+              name="noTensionPreference"
+              className={styles.checkbox}
+              onChange={(e) => setTensionPreference(e.target.checked)}
+              checked={tensionPreference}
+            />
             <label className={styles.label} htmlFor="noTensionPreference">
               Please check this box if you do not have a tension preference. We can discuss options when you drop off your racket.
             </label>
